@@ -23,10 +23,12 @@ while play:
         print ("Awesome! We'll begin with easy! You have 10 lives.")
         top = 100
         tries = 10
+        break
     elif level == 2:
         print ("Awesome! We'll begin with medium! You have 7 lives.")
         top = 100
         tries = 7
+        break
     elif level == 3:
         print ("Awesome! We'll begin with hard! You have 5 lives")
         top = 100
@@ -55,7 +57,14 @@ lives = 5 # sample data, normally the lives should be chosen based on the diffic
 # STEP 3
 # display the chosen word to guess with all letters replaced by "_"
 # for example instead of "Cairo" display "_ _ _ _ _"
-
+# def displayBoard(missedLetters, correctLetters, secretWord):
+#  print(HANGMAN_PICS[len(missedLetters)])
+#  print()
+# print('Missed letters:', end=' ')
+#  for letter in missedLetters:
+# print(letter, end=' ')
+# print()
+# blanks = '_' * len(secretWord)
 
 # STEP 4
 # ask the user to type a letter
