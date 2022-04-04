@@ -1,14 +1,46 @@
 # PART 1
 # display a menu with at least 3 difficulty choices and ask the user
 # to select the desired level
-difficulty = "1" # sample data, normally the user should choose the difficulty
+#difficulty = "1" # sample data, normally the user should choose the difficulty
+import random
+print("Welcome to Hangman game")
 
+play = True
+while play:
+    print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
+    level = int(input("Select difficulty: "))
+    if level == 1:
+        print("\nAwesome! We'll begin with easy! You have 10 lives")
+        break
+    elif level == 2:
+        print("\nAwesome! We'll begin with medium!You have 7 lives")
+        break
+    elif level == 3:
+        print("\nAwesome! We'll begin with hard!You have 5 lives")
+        break
+    else:
+        print("Invalid input!\nPlease enter either 1, 2 or 3. ")
+           
+            
+    
+
+        
+
+    
+
+words = ""
+f = open("countries-and-capitals.txt")
+lines = f.readlines()
+words = random.choice(lines)
+wordposition = words.index(" | ")
+word_to_guess = words[0:wordposition]
+print(word_to_guess)
 
 # STEP 2
 # based on the chosen difficulty level, set the values 
 # for the player's lives
-word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
-lives = 5 # sample data, normally the lives should be chosen based on the difficulty
+#word_to_guess = "Cairo" # sample data, normally the word should be chosen from the countries-and-capitals.txt
+#lives = 5 # sample data, normally the lives should be chosen based on the difficulty
 
 
 # STEP 3
@@ -28,7 +60,7 @@ lives = 5 # sample data, normally the lives should be chosen based on the diffic
 # HINT: search on the internet: `python if letter in list`
 # If it is not, than append to the tried letters
 # If it has already been typed, return to STEP 5. HINT: use a while loop here
-already_tried_letters = [] # this list will contain all the tried letters
+#already_tried_letters = [] # this list will contain all the tried letters
 
 
 # STEP 6
