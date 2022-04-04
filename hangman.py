@@ -28,7 +28,34 @@ f = open("countries-and-capitals.txt")
 lines = f.readlines()
 words = random.choice(lines)
 wordposition = words.index(" | ")
-word_to_guess = words[0:wordposition]
+secretWord = words[0:wordposition]
+print(secretWord)
+
+
+missedLetters = []
+correctLetters = []
+
+print(" _ "*len(secretWord))
+def displayBoard(missedLetters, correctLetters, secretWord):
+
+    print('Missed Letters:', end=' ')
+    for letter in missedLetters:
+        print(letter, end=' ')
+    print("\n")
+
+    blanks = ' _ ' * len(secretWord)
+
+    for i in range(len(secretWord)):  # replace blanks with correctly guessed letters
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
+
+    for letter in blanks:  # show the secret word with spaces in between each letter
+        print(letter, end=' ')
+    print("\n")
+
+
+    
+
 
 
 
@@ -58,6 +85,7 @@ word_to_guess = words[0:wordposition]
 # print(letter, end=' ')
 # print()
 # blanks = '_' * len(secretWord)
+
 
 # STEP 4
 # ask the user to type a letter
