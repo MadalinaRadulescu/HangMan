@@ -2,6 +2,7 @@
 # display a menu with at least 3 difficulty choices and ask the user
 # to select the desired level
 # sample data, normally the user should choose the difficulty
+from operator import truediv
 import random
 words = ""
 f = open("countries-and-capitals.txt")
@@ -11,29 +12,29 @@ wordposition = words.index(" | ")
 word_to_guess = words[0:wordposition]
 print(word_to_guess)
 
-from operator import truediv
-import random
+
+# import random
 hello = input("Hello ! Welcome to hangman!")
 play = True
 difficulty = "1"
 while play:
     level = int(input('Pick a level of difficulty 1(easy), 2(medium), 3(hard): '))
     if level == 1:
-        print ("Awesome! We'll begin with easy!")
+        print ("Awesome! We'll begin with easy! You have 10 lives.")
         top = 100
         tries = 10
     elif level == 2:
-        print ("Awesome! We'll begin with medium!")
+        print ("Awesome! We'll begin with medium! You have 7 lives.")
         top = 100
         tries = 7
     elif level == 3:
-        print ("Awesome! We'll begin with hard!")
+        print ("Awesome! We'll begin with hard! You have 5 lives")
         top = 100
         tries = 5
+        break
     else:
         top = 100
         tries = 10
-
     # if level == 1:
     #     print ("Awesome! We'll begin with easy!")
     # if level == 2:
@@ -42,6 +43,7 @@ while play:
     #     print ("Awesome! We'll begin with hard!")
     if level != 1 and level != 2 and level != 3:
         print ("Invalid input!")
+    
 
 # STEP 2
 # based on the chosen difficulty level, set the values 
