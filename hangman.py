@@ -36,6 +36,40 @@ wordposition = words.index(" | ")
 word_to_guess = words[0:wordposition]
 print(word_to_guess)
 
+# import random
+hello = input("Hello ! Welcome to hangman!")
+play = True
+difficulty = "1"
+while play:
+    level = int(input('Pick a level of difficulty 1(easy), 2(medium), 3(hard): '))
+    if level == 1:
+        print ("Awesome! We'll begin with easy! You have 10 lives.")
+        top = 100
+        tries = 10
+        break
+    elif level == 2:
+        print ("Awesome! We'll begin with medium! You have 7 lives.")
+        top = 100
+        tries = 7
+        break
+    elif level == 3:
+        print ("Awesome! We'll begin with hard! You have 5 lives")
+        top = 100
+        tries = 5
+        break
+    else:
+        top = 100
+        tries = 10
+    # if level == 1:
+    #     print ("Awesome! We'll begin with easy!")
+    # if level == 2:
+    #     print ("Awesome! We'll begin with medium!")
+    # if level == 3:
+    #     print ("Awesome! We'll begin with hard!")
+    if level != 1 and level != 2 and level != 3:
+        print ("Invalid input!")
+    
+
 # STEP 2
 # based on the chosen difficulty level, set the values 
 # for the player's lives
@@ -46,7 +80,14 @@ print(word_to_guess)
 # STEP 3
 # display the chosen word to guess with all letters replaced by "_"
 # for example instead of "Cairo" display "_ _ _ _ _"
-
+# def displayBoard(missedLetters, correctLetters, secretWord):
+#  print(HANGMAN_PICS[len(missedLetters)])
+#  print()
+# print('Missed letters:', end=' ')
+#  for letter in missedLetters:
+# print(letter, end=' ')
+# print()
+# blanks = '_' * len(secretWord)
 
 # STEP 4
 # ask the user to type a letter
