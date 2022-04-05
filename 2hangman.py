@@ -1,32 +1,11 @@
 import random
 import string
+import hangmanpic
 print("Welcome to the Hangman game")
-
-
-# def select_difficulty():
-#     print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
-#     level = int(input("Select difficulty: "))
-#     lives = 0
-#     while True:
-#         if level == 1:
-#             lives += 10
-#             print("\nAwesome! We'll begin with easy! You have 10 lives")
-#             break
-#         elif level == 2:
-#             lives += 7
-#             print("\nAwesome! We'll begin with medium!You have 7 lives")
-#             break
-#         elif level == 3:
-#             lives += 5
-#             print("\nAwesome! We'll begin with hard!You have 5 lives")
-#             break
-#         else:
-#             print("Invalid input!\nPlease enter either 1, 2 or 3. ")
-
-
 
 f = open("countries-and-capitals.txt")
 lines = f.readlines()
+
 
 def get_secretword(lines):
     word = ""
@@ -35,25 +14,24 @@ def get_secretword(lines):
     secretword = word[0:wordposition]
     return secretword.upper()
 
+
 get_secretword(lines)
 
 
 def hangman():
-    secretword = get_secretword(lines)
+    secretword = "REPUBLICA MOLDOVA"  # get_secretword(lines)
     secretword_letters = set(secretword)
     alphabet = (string.ascii_uppercase)
     used_letter = set()
     lives = select_difficulty()
 
     while len(secretword_letters) > 0 and lives > 0:
-            
         print("You have used these letters: " + ' '.join(used_letter))
         secretword_list = [letter if letter in used_letter else " _ " for letter in secretword]
 
         print("Current word: " + ' '.join(secretword_list))
-        guess_letter = raw_input("Guess a letter: ").upper()
-        if guess_letter in alphabet:
-            used_letter.add(guess_letter)
+        guess_letter = input("Guess a letter: ").upper()
+        if guess_letter in alphabet or guess_letter == " ":
             if guess_letter in secretword_letters:
                 secretword_letters.remove(guess_letter)
             elif guess_letter in used_letter:
@@ -61,6 +39,9 @@ def hangman():
             else:
                 lives = lives - 1
                 print("Letter is not in word")
+                print(hangmanpic.HANGMANPICS[6 - lives])
+                print("You have " + str(lives) + " lives left")
+            used_letter.add(guess_letter)
         else:
             print("Invalid input. Please try again.")
 
@@ -69,30 +50,24 @@ def hangman():
     else:
         print("You guessed the word " + secretword + "!!")
 
-    
+
 def select_difficulty():
-        print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
-        level = int(input("Select difficulty: "))
-        lives = 0
-        while True:
-            if level == 1:
-                lives += 10
-                print("\nAwesome! We'll begin with easy! You have 10 lives")
-                break
-            elif level == 2:
-                lives += 7
-                print("\nAwesome! We'll begin with medium!You have 7 lives")
-                break
-            elif level == 3:
-                lives += 5
-                print("\nAwesome! We'll begin with hard!You have 5 lives")
-                break
-            else:
-                print("Invalid input!\nPlease enter either 1, 2 or 3. ")
+    print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
+    level = int(input("Select difficulty: "))
+    lives = 0
+    if level == 1:
+        lives += 7
+        print("\nAwesome! We'll begin with easy! You have 7 lives")
+    elif level == 2:
+        lives += 5
+        print("\nAwesome! We'll begin with medium!You have 5 lives")
+    elif level == 3:
+        lives += 3
+        print("\nAwesome! We'll begin with hard!You have 3 lives")
+    else:
+        print("Invalid input!\nPlease enter either 1, 2 or 3. ")
+
+    return lives
 
 
-if __name__ == "__main__":
-    
-    hangman()
-
-
+hangman()
