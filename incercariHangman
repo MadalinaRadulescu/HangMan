@@ -1,0 +1,56 @@
+import random
+print("Welcome to Hangman game")
+
+play = True
+while play:
+    print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
+    level = int(input("Select difficulty: "))
+    if level == 1:
+        print("\nAwesome! We'll begin with easy! You have 10 lives")
+        break
+    elif level == 2:
+        print("\nAwesome! We'll begin with medium!You have 7 lives")
+        break
+    elif level == 3:
+        print("\nAwesome! We'll begin with hard!You have 5 lives")
+        break
+    else:
+        print("Invalid input!\nPlease enter either 1, 2 or 3. ")
+           
+            
+
+words = ""
+f = open("countries-and-capitals.txt")
+lines = f.readlines()
+words = random.choice(lines)
+wordposition = words.index(" | ")
+secretWord = words[0:wordposition]
+print(secretWord)
+
+
+missedLetters = []
+correctLetters = []
+
+print(" _ "*len(secretWord))
+def displayBoard(missedLetters, correctLetters, secretWord):
+
+    print('Missed Letters:', end=' ')
+    for letter in missedLetters:
+        print(letter, end=' ')
+    print("\n")
+
+    blanks = ' _ ' * len(secretWord)
+
+    for i in range(len(secretWord)):  # replace blanks with correctly guessed letters
+        if secretWord[i] in correctLetters:
+            blanks = blanks[:i] + secretWord[i] + blanks[i+1:]
+
+    for letter in blanks:  # show the secret word with spaces in between each letter
+        print(letter, end=' ')
+    print("\n")
+
+
+    
+
+
+
