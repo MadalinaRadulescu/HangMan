@@ -32,7 +32,6 @@ def hangman():
         print("Current word: " + ' '.join(secretword_list))
         guess_letter = input("Guess a letter: ").upper()
         if guess_letter in alphabet or guess_letter == " ":
-            used_letter.add(guess_letter)
             if guess_letter in secretword_letters:
                 secretword_letters.remove(guess_letter)
             else:
@@ -44,8 +43,9 @@ def hangman():
             print("You already used that character. Please try again")
         elif guess_letter == "QUIT":
             quit()
-        else:
-            print("Invalid input. Please try again.")
+        used_letter.add(guess_letter)
+    else:
+        print("Invalid input. Please try again.")
 
     if lives == 0:
         print("You died, sorry. The word was " + secretword + "!")
