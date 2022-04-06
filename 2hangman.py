@@ -12,14 +12,14 @@ def get_secretword(lines):
     word = random.choice(lines)
     wordposition = word.index(" | ")
     secretword = word[0:wordposition]
-    return secretword.upper()
+    return secretword
 
 
 get_secretword(lines)
 
 
 def hangman():
-    secretword = "REPUBLICA MOLDOVA"  # get_secretword(lines)
+    secretword = "Republica Moldova"  # get_secretword(lines)
     secretword_letters = set(secretword)
     alphabet = (string.ascii_uppercase)
     used_letter = set()
@@ -30,18 +30,22 @@ def hangman():
         secretword_list = [letter if letter in used_letter else " _ " for letter in secretword]
 
         print("Current word: " + ' '.join(secretword_list))
-        guess_letter = input("Guess a letter: ").upper()
-        if guess_letter in alphabet or guess_letter == " ":
-            if guess_letter in secretword_letters:
-                secretword_letters.remove(guess_letter)
+        guess_letter = input("Guess a letter: ")
+        if guess_letter.upper() in alphabet or guess_letter == " ":
+            if guess_letter.upper() in secretword_letters:
+                used_letter.add(guess_letter.upper())
+                secretword_letters.remove(guess_letter.upper())
+            elif guess_letter.lower() in secretword_letters:
+                used_letter.add(guess_letter.lower())
+                secretword_letters.remove(guess_letter.lower())
             elif guess_letter in used_letter:
+                used_letter.add(guess_letter)
                 print("You already used that character. Please try again")
             else:
                 lives = lives - 1
                 print("Letter is not in word")
                 print(hangmanpic.HANGMANPICS[6 - lives])
                 print("You have " + str(lives) + " lives left")
-            used_letter.add(guess_letter)
         else:
             print("Invalid input. Please try again.")
 

@@ -54,3 +54,5 @@ def displayBoard(missedLetters, correctLetters, secretWord):
 
 
 
+#spatiul sa nu fie inlocuit de liniuta
+#sa ramana cuvantul cu literele initiale
