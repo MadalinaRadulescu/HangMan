@@ -12,14 +12,14 @@ def get_secretword(lines):
     word = random.choice(lines)
     wordposition = word.index(" | ")
     secretword = word[0:wordposition]
-    return secretword.upper()
+    return secretword
 
 
 get_secretword(lines)
 
 
 def hangman():
-    secretword = get_secretword(lines)
+    secretword = "Republica Moldova"  # get_secretword(lines)
     secretword_letters = set(secretword)
     alphabet = (string.ascii_uppercase)
     used_letter = set()
@@ -44,16 +44,37 @@ def hangman():
             if guess_letter in secretword_letters:
                 secretword_letters.remove(guess_letter)
             elif guess_letter in used_letter:
+        print("You have " + str(lives) + " lives left and you used these letters: " + ' '.join(used_letter))
+        secretword_list = [letter if letter in used_letter else " _ " for letter in secretword]
+
+        print("Current word: " + ' '.join(secretword_list))
+        guess_letter = input("Guess a letter: ")
+        if guess_letter.upper() == "QUIT":
+            quit()
+        if guess_letter.upper() in alphabet or guess_letter == " ":
+            if guess_letter.upper() in secretword_letters:
+                used_letter.add(guess_letter.upper())
+                secretword_letters.remove(guess_letter.upper())
+            elif guess_letter.lower() in secretword_letters:
+                used_letter.add(guess_letter.lower())
+                secretword_letters.remove(guess_letter.lower())
+            elif guess_letter in used_letter:
+                used_letter.add(guess_letter)
                 print("You already used that character. Please try again")
             else:
                 lives = lives - 1
                 print("Letter is not in word")
                 print(hangmanpic.HANGMANPICS[6 - lives])
                 # print("You have " + str(lives) + " lives left")
+<<<<<<< HEAD
         elif guess_letter == "QUIT":
             quit()
         else:
             print("Invalid input. Please try again.")
+=======
+    else:
+        print("Invalid input. Please try again.")
+>>>>>>> 60050244b19a10715fa2549312e09a8552cb742f
 
     if lives == 0:
         print("You died, sorry. The word was " + secretword + "!")
@@ -65,22 +86,21 @@ def select_difficulty():
     print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
     level = int(input("Select difficulty: "))
     lives = 0
-    while True:
-        if level == 1:
-            lives += 7
-            print("\nAwesome! We'll begin with easy! You have 7 lives")
-            return lives
-        elif level == 2:
-            lives += 5
-            print("\nAwesome! We'll begin with medium!You have 5 lives")
-            return lives
-        elif level == 3:
-            lives += 3
-            print("\nAwesome! We'll begin with hard!You have 3 lives")
-            return lives
-        else:
-            print("Invalid input!\nPlease enter either 1, 2 or 3. ")
-            return select_difficulty()
-    
+    if level == 1:
+        lives += 7
+        print("\nAwesome! We'll begin with easy! You have 7 lives")
+        return lives
+    elif level == 2:
+        lives += 5
+        print("\nAwesome! We'll begin with medium!You have 5 lives")
+        return lives
+    elif level == 3:
+        lives += 3
+        print("\nAwesome! We'll begin with hard!You have 3 lives")
+        return lives
+    else:
+        print("Invalid input!\nPlease enter either 1, 2 or 3. ")
+        return select_difficulty()
+
 
 hangman()
