@@ -27,21 +27,29 @@ def hangman():
 
     while len(secretword_letters) > 0 and lives > 0:
         print("You have " + str(lives) + " lives left and you  used these letters: " + ' '.join(used_letter))
-        secretword_list = [letter if letter in used_letter else " _ " for letter in secretword]
+        secretword_list = ""
+        for i in secretword:
+            if i not in used_letter and i != " ":
+                secretword_list += " _ "
+            elif i == " ":
+                secretword_list += "    "
+            else:
+                secretword_list += i
 
         print("Current word: " + ' '.join(secretword_list))
         guess_letter = input("Guess a letter: ").upper()
-        if guess_letter in alphabet or guess_letter == " ":
+
+        if guess_letter in alphabet and guess_letter !=used_letter:
             used_letter.add(guess_letter)
             if guess_letter in secretword_letters:
                 secretword_letters.remove(guess_letter)
+            elif guess_letter in used_letter:
+                print("You already used that character. Please try again")
             else:
                 lives = lives - 1
                 print("Letter is not in word")
                 print(hangmanpic.HANGMANPICS[6 - lives])
                 # print("You have " + str(lives) + " lives left")
-        elif guess_letter in used_letter:
-            print("You already used that character. Please try again")
         elif guess_letter == "QUIT":
             quit()
         else:
