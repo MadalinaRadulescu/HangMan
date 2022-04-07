@@ -12,8 +12,11 @@ def get_secretword(lines):
     word = random.choice(lines)
     wordposition = word.index(" | ")
     secretword = word[0:wordposition]
-    return secretword.upper()
+    return secretword
 
+
+def get_numletters():
+    for l in secret
 
 
 

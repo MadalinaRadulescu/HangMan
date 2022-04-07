@@ -25,14 +25,14 @@ def hangman():
     alphabet = (string.ascii_uppercase) + (string.ascii_lowercase)
     used_letter = set()
     lives = select_difficulty()
-
+    correctletters = [] 
     while len(secretword_letters) > 0 and lives > 0:
 
-        print("You have " + str(lives) + " lives left and you  used these letters: " + ' '.join(used_letter))
+        print("You have " + str(lives) + " lives left and you  used these wrong letters: " + ' '.join(used_letter))
 
         secretword_list = ""
         for i in secretword:
-            if i not in used_letter and i != " ":
+            if i not in correctletters and i != " ":
                 secretword_list += " _ "
             elif i == " ":
                 secretword_list += "    "
@@ -51,11 +51,13 @@ def hangman():
 
                 if guess_letter.upper() in secretword_letters:
                     secretword_letters.remove(guess_letter.upper())
-                    used_letter.add(guess_letter.upper())
+                    correctletters.append(guess_letter.upper())
+                    
 
                 if guess_letter.lower() in secretword_letters:
                     secretword_letters.remove(guess_letter.lower())
-                    used_letter.add(guess_letter.lower())
+                    correctletters.append(guess_letter.lower())
+                    
 
                 elif guess_letter.lower() in used_letter or guess_letter.upper() in used_letter:
                     print("You already used that character. Please try again")
