@@ -19,7 +19,8 @@ get_secretword(lines)
 
 
 def hangman():
-    secretword = "Rrepublica moldvova"
+
+    secretword = get_secretword(lines)
     secretword_letters = set(secretword)
     alphabet = (string.ascii_uppercase) + (string.ascii_lowercase)
     used_letter = set()
@@ -39,12 +40,13 @@ def hangman():
                 secretword_list += i
 
         print("Current word: " + ' '.join(secretword_list))
-        guess_letter = input("Guess a letter: ")
+        guess_letter = input("\nGuess a letter: ")
 
         if guess_letter.upper() == "QUIT":
             quit()
 
         if guess_letter in alphabet:
+
             if guess_letter.lower() != used_letter and guess_letter.upper() != used_letter:
 
                 if guess_letter.upper() in secretword_letters:
@@ -81,9 +83,14 @@ def hangman():
 def select_difficulty():
 
     print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
-
-    level = int(input("Select difficulty: "))
-    lives = 0
+    while True:
+        level = input("Select difficulty: ")
+        lives = 0
+        try:
+            level = int(level)
+            break
+        except ValueError:
+            print("Thats not an integer")
 
     if level == 1:
         lives += 7
