@@ -7,25 +7,18 @@ f = open("countries-and-capitals.txt")
 lines = f.readlines()
 
 
-def get_secretword(lines):
-    word = ""
-    word = random.choice(lines)
-    wordposition = word.index(" | ")
-    secretword = word[0:wordposition]
-    return secretword
-
-
-get_secretword(lines)
-
-
 def hangman():
 
     secretword = get_secretword(lines)
     secretword_letters = set(secretword)
+    if " " in secretword_letters:
+        secretword_letters.remove(' ')
+
     alphabet = (string.ascii_uppercase) + (string.ascii_lowercase)
     used_letter = set()
     lives = select_difficulty()
     correctletters = [] 
+
     while len(secretword_letters) > 0 and lives > 0:
 
         print("You have " + str(lives) + " lives left and you  used these wrong letters: " + ' '.join(used_letter))
@@ -49,17 +42,18 @@ def hangman():
 
             if guess_letter.lower() != used_letter and guess_letter.upper() != used_letter:
 
-                if guess_letter.upper() in secretword_letters:
+                if guess_letter.upper() in secretword_letters: 
                     secretword_letters.remove(guess_letter.upper())
                     correctletters.append(guess_letter.upper())
-                    
 
-                if guess_letter.lower() in secretword_letters:
+                elif guess_letter.lower() in secretword_letters:
                     secretword_letters.remove(guess_letter.lower())
                     correctletters.append(guess_letter.lower())
-                    
 
                 elif guess_letter.lower() in used_letter or guess_letter.upper() in used_letter:
+                    print("You already used that character. Please try again")
+
+                elif guess_letter.lower() in correctletters or guess_letter.upper() in correctletters:
                     print("You already used that character. Please try again")
 
                 else:
@@ -69,9 +63,9 @@ def hangman():
                     print(hangmanpic.HANGMANPICS[6 - lives])
                     # print("You have " + str(lives) + " lives left")
 
-        elif guess_letter == " " and guess_letter in secretword_letters:
-            secretword_letters.remove(guess_letter)
-            used_letter.add(guess_letter)
+        #elif guess_letter == " " and guess_letter in secretword_letters:
+            # secretword_letters.remove(guess_letter)
+            # used_letter.add(guess_letter)
 
         else:
             print("Invalid input. Please try again.")
@@ -80,6 +74,14 @@ def hangman():
         print("You died, sorry. The word was " + secretword + "!")
     else:
         print("You guessed the word " + secretword + "!!")
+
+
+def get_secretword(lines):
+    word = ""
+    word = random.choice(lines)
+    wordposition = word.index(" | ")
+    secretword = word[0:wordposition]
+    return secretword
 
 
 def select_difficulty():
