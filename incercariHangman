@@ -9,7 +9,7 @@ lines = f.readlines()
 
 def hangman():
 
-    secretword = "Romania" #get_secretword(lines)
+    secretword = "Romrania" #get_secretword(lines)
     secretword_letters = set(secretword)
     if " " in secretword_letters:
          secretword_letters.remove(' ')
@@ -46,7 +46,7 @@ def hangman():
                     secretword_letters.remove(guess_letter.upper())
                     correctletters.append(guess_letter.upper())
 
-                elif guess_letter.lower() in secretword_letters:
+                if guess_letter.lower() in secretword_letters:
                     secretword_letters.remove(guess_letter.lower())
                     correctletters.append(guess_letter.lower())
 

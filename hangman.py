@@ -46,7 +46,7 @@ def hangman():
                     secretword_letters.remove(guess_letter.upper())
                     correctletters.append(guess_letter.upper())
 
-                elif guess_letter.lower() in secretword_letters:
+                if guess_letter.lower() in secretword_letters:
                     secretword_letters.remove(guess_letter.lower())
                     correctletters.append(guess_letter.lower())
 
