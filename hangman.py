@@ -1,7 +1,7 @@
 import random
 import string
 import hangmanpic
-print("Welcome to the Hangman game")
+print("\nWelcome to the Hangman game")
 
 f = open("countries-and-capitals.txt")
 lines = f.readlines()
@@ -21,7 +21,7 @@ def hangman():
 
     while len(secretword_letters) > 0 and lives > 0:
 
-        print("You have " + str(lives) + " lives left and you  used these wrong letters: " + ' '.join(used_letter))
+        print("\nYou have " + str(lives) + " lives left and you  used these wrong letters: " + ' '.join(used_letter))
 
         secretword_list = ""
         for i in secretword:
@@ -32,7 +32,7 @@ def hangman():
             else:
                 secretword_list += i
 
-        print("Current word: " + ' '.join(secretword_list))
+        print("\nCurrent word: " + ' '.join(secretword_list))
         guess_letter = input("\nGuess a letter: ")
 
         if guess_letter.upper() == "QUIT":
@@ -73,7 +73,16 @@ def hangman():
     if lives == 0:
         print("You died, sorry. The word was " + secretword + "!")
     else:
-        print("You guessed the word " + secretword + "!!")
+        secretword_list = ""
+        for i in secretword:
+            if i not in correctletters and i != " ":
+                secretword_list += " _ "
+            elif i == " ":
+                secretword_list += "    "
+            else:
+                secretword_list += i
+        print("\nCurrent word: " + ' '.join(secretword_list))
+        print("\nYou win. You guessed the word " + secretword + "!!")
 
 
 def get_secretword(lines):
@@ -86,9 +95,9 @@ def get_secretword(lines):
 
 def select_difficulty():
 
-    print("Would you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
+    print("\nWould you like to play difficulty 1(easy), 2(medium), or 3(hard)?")
     while True:
-        level = input("Select difficulty: ")
+        level = input("\nSelect difficulty: ")
         lives = 0
         try:
             level = int(level)
